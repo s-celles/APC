@@ -136,7 +136,7 @@ class AbstractAPC:
             try:
                 outlet = int(outlet)
                 return (outlet, 'Outlet #%d' % outlet)
-            except:
+            except Exception:
                 raise SystemExit('Bad outlet: [%s]' % outlet)
 
     def _escape_to_main(self, depth=6):
