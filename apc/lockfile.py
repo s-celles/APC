@@ -21,7 +21,7 @@ try:
     from os import readlink
     from os import remove as rmlink
     _windows = False
-except:
+except Exception:
     _windows = True
 
     try:
@@ -61,7 +61,7 @@ except:
         f.close()
         try:
             rename(newlinkname, filename)
-        except:
+        except Exception:
             os.remove(newvalname)
             os.rmdir(newlinkname)
             raise
