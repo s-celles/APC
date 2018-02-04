@@ -20,7 +20,7 @@ Installation
 ------------
 
 ```bash
-$ pip install git+https://github.com/quackenbush/APC
+$ pip install git+https://github.com/scls19fr/APC
 ```
 
 or
