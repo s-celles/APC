@@ -197,13 +197,13 @@ def isLocked(name):
     @rtype: C{bool}
     @return: True if the lock is held, False otherwise.
     """
-    l = FilesystemLock(name)
+    lock = FilesystemLock(name)
     result = None
     try:
-        result = l.lock()
+        result = lock.lock()
     finally:
         if result:
-            l.unlock()
+            lock.unlock()
     return not result
 
 
