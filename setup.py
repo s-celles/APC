@@ -11,8 +11,8 @@ setup(
     author=release.__author__,
     author_email=release.__email__,
     description=release.__description__,
-    url='https://github.com/quackenbush/APC/',
-    download_url='https://github.com/quackenbush/APC/archive/master.zip',
+    url='https://github.com/scls19fr/APC/',
+    download_url='https://github.com/scls19fr/APC/archive/master.zip',
     license='MIT',
     classifiers=[
             'Development Status :: 4 - Beta',
