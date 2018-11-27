@@ -1,7 +1,7 @@
 APC Network Power Management Controller
 =======================================
 
-[![Build Status](https://travis-ci.org/scls19fr/APC.svg?branch=master)](https://travis-ci.org/scls19fr/APC)
+[![Build Status](https://travis-ci.com/scls19fr/APC.svg?branch=master)](https://travis-ci.com/scls19fr/APC)
 
 Controls rebooting of APC network PDU switches with 'telnet' network interface.
 Tested with the AP7900, but likely works with other models.
