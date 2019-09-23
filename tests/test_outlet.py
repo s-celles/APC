@@ -55,19 +55,26 @@ def test_outlet_contructor():
     assert str(ol) == 'Outlet 2 AAAAAAAAAAAAAAA OFF*'  # display name with only 15 characters
 
 def test_outlet_parse():
-    row = 'Outlet 2 MyServer#2      ON*'
+    row = '2- Outlet 2 MyServer#2      ON*'
     ol = Outlet.parse(row)
     assert ol.id == 2
     assert ol.name == 'MyServer#2'
     assert str(ol.status) == 'ON*'
-    assert str(ol) == row
+    assert str(ol) == "Outlet 2 MyServer#2      ON*"
 
-    row = 'Outlet 2 AAAAAAAAAAAAA   OFF*'
+    row = '2- Outlet 2 AAAAAAAAAAAAA   OFF*'
     ol = Outlet.parse(row)
     assert ol.id == 2
     assert ol.name == 'AAAAAAAAAAAAA'
     assert str(ol.status) == 'OFF*'
-    assert str(ol) == row
+    assert str(ol) == "Outlet 2 AAAAAAAAAAAAA   OFF*"
+
+    row = '2- AAAAAAAAAAAAA   OFF*'
+    ol = Outlet.parse(row)
+    assert ol.id == 2
+    assert ol.name == 'AAAAAAAAAAAAA'
+    assert str(ol.status) == 'OFF*'
+    assert str(ol) == "Outlet 2 AAAAAAAAAAAAA   OFF*"
 
     with pytest.raises(OutletParseException):
         row = 'Xutlet 2 AAAAAAAAAAAAAAA OFF*'  # this is not an allowed status an exception should be raised

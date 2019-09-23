@@ -338,8 +338,7 @@ class APC3(AbstractAPC):
         rows = s.split("\n")
         lst_outlets = []
         for row in rows[:-1]:
-            row = row.strip()[3:]
-            ol = Outlet.parse(row)
+            ol = Outlet.parse(row.strip())
             lst_outlets.append(ol)
         ol_collection = Outlets(lst_outlets)
         return ol_collection
