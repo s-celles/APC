@@ -2,8 +2,9 @@
 
 from collections import OrderedDict
 import re
-APC_OUTLET_STATUS_PATTERN = re.compile('(OFF|ON)(\*?)')
-APC_OUTLET_ROW_PATTERN = re.compile('Outlet (\d) (.*) (OFF\*?|ON\*?)')
+APC_OUTLET_STATUS_PATTERN = re.compile(r'(OFF|ON)(\*?)')
+APC_OUTLET_ROW_PATTERN = re.compile(r'Outlet (\d) (.*) (OFF\*?|ON\*?)')
+APC_OUTLET_ROW_PATTERN2 = re.compile(r'(\d)- (.*) (OFF\*?|ON\*?)')
 
 
 class OutletStatusParseException(Exception):
@@ -63,7 +64,17 @@ class Outlet:
 
     @classmethod
     def parse(cls, s):
-        match = APC_OUTLET_ROW_PATTERN.search(s)
+        # Two forms of rows can be parsed, either:
+        # 1- OUTLETNAME    ON"
+        # or
+        # Outlet 1 OUTLETNAME    ON"
+
+        # try first form, without the 3 first characters
+        match = APC_OUTLET_ROW_PATTERN.search(s[3:])
+        # if fails, try second
+        if not match:
+            match = APC_OUTLET_ROW_PATTERN2.search(s)
+        # fail if neither patterns match
         if not match:
             raise OutletParseException('Could not parse APC outlet status')
         s_id, s_name, s_status = match.groups()

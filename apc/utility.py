@@ -20,7 +20,7 @@ APC_ESCAPE = '\033'
 APC_YES    = 'YES'
 APC_LOGOUT = '4'
 
-APC_VERSION_PATTERN = re.compile(' v(\d+\.\d+\.\d+)')
+APC_VERSION_PATTERN = re.compile(r' v(\d+\.\d+\.\d+)')
 
 APC_DEFAULT_HOST     = os.environ.get('APC_HOST',     '192.168.1.2')
 APC_DEFAULT_USER     = os.environ.get('APC_USER',     'apc')
@@ -338,8 +338,7 @@ class APC3(AbstractAPC):
         rows = s.split("\n")
         lst_outlets = []
         for row in rows[:-1]:
-            row = row.strip()[3:]
-            ol = Outlet.parse(row)
+            ol = Outlet.parse(row.strip())
             lst_outlets.append(ol)
         ol_collection = Outlets(lst_outlets)
         return ol_collection

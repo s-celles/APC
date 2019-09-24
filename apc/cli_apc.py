@@ -49,7 +49,7 @@ def main():
 
     try:
         apc = APC(args.host, args.user, args.password, args.verbose, args.quiet, args.cli)
-    except pexpect.TIMEOUT as e:
+    except pexpect.TIMEOUT:
         raise SystemExit('ERROR: Timeout connecting to APC')
 
     args.delay = int(args.delay)
