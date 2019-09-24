@@ -20,7 +20,7 @@ APC_ESCAPE = '\033'
 APC_YES    = 'YES'
 APC_LOGOUT = '4'
 
-APC_VERSION_PATTERN = re.compile(' v(\d+\.\d+\.\d+)')
+APC_VERSION_PATTERN = re.compile(r' v(\d+\.\d+\.\d+)')
 
 APC_DEFAULT_HOST     = os.environ.get('APC_HOST',     '192.168.1.2')
 APC_DEFAULT_USER     = os.environ.get('APC_USER',     'apc')

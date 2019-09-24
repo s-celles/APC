@@ -2,9 +2,9 @@
 
 from collections import OrderedDict
 import re
-APC_OUTLET_STATUS_PATTERN = re.compile('(OFF|ON)(\*?)')
-APC_OUTLET_ROW_PATTERN = re.compile('Outlet (\d) (.*) (OFF\*?|ON\*?)')
-APC_OUTLET_ROW_PATTERN2 = re.compile('(\d)- (.*) (OFF\*?|ON\*?)')
+APC_OUTLET_STATUS_PATTERN = re.compile(r'(OFF|ON)(\*?)')
+APC_OUTLET_ROW_PATTERN = re.compile(r'Outlet (\d) (.*) (OFF\*?|ON\*?)')
+APC_OUTLET_ROW_PATTERN2 = re.compile(r'(\d)- (.*) (OFF\*?|ON\*?)')
 
 
 class OutletStatusParseException(Exception):
