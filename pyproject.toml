@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "apc"
+version = "0.1.0"
+description = "APC power switch automation"
+authors = ["Sebastien Celles"]
+license = "MIT License"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+pexpect = "^4.9.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
