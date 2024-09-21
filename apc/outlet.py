@@ -2,9 +2,10 @@
 
 from collections import OrderedDict
 import re
-APC_OUTLET_STATUS_PATTERN = re.compile(r'(OFF|ON)(\*?)')
-APC_OUTLET_ROW_PATTERN = re.compile(r'Outlet (\d) (.*) (OFF\*?|ON\*?)')
-APC_OUTLET_ROW_PATTERN2 = re.compile(r'(\d)- (.*) (OFF\*?|ON\*?)')
+
+APC_OUTLET_STATUS_PATTERN = re.compile(r"(OFF|ON)(\*?)")
+APC_OUTLET_ROW_PATTERN = re.compile(r"Outlet (\d) (.*) (OFF\*?|ON\*?)")
+APC_OUTLET_ROW_PATTERN2 = re.compile(r"(\d)- (.*) (OFF\*?|ON\*?)")
 
 
 class OutletStatusParseException(Exception):
@@ -34,7 +35,7 @@ class OutletStatus:
         s = s.upper()
         match = APC_OUTLET_STATUS_PATTERN.search(s)
         if not match:
-            raise OutletStatusParseException('Could not parse APC outlet status')
+            raise OutletStatusParseException("Could not parse APC outlet status")
         s_on_off, s_pending = match.groups()
         if s_on_off == "ON":
             on = True
@@ -52,7 +53,7 @@ class OutletParseException(Exception):
 
 
 class Outlet:
-    def __init__(self, id, name='', status='OFF'):
+    def __init__(self, id, name="", status="OFF"):
         self.id = id
         self.name = name
         self.status = OutletStatus.parse(status)
@@ -76,7 +77,7 @@ class Outlet:
             match = APC_OUTLET_ROW_PATTERN2.search(s)
         # fail if neither patterns match
         if not match:
-            raise OutletParseException('Could not parse APC outlet status')
+            raise OutletParseException("Could not parse APC outlet status")
         s_id, s_name, s_status = match.groups()
         id = int(s_id)
         name = s_name.strip()
@@ -92,7 +93,9 @@ class Outlets:
         self._d = OrderedDict()
         for outlet in lst_outlets:
             if outlet.id in self._d:
-                raise OutletsException("Outlet %d ever exists in this collection"  % outlet.id)
+                raise OutletsException(
+                    "Outlet %d ever exists in this collection" % outlet.id
+                )
             self._d[outlet.id] = outlet
 
     def __str__(self):

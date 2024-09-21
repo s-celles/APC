@@ -15,11 +15,13 @@ import os
 from time import time as _uniquefloat
 
 from os import rename
+
 try:
     from os import kill
     from os import symlink
     from os import readlink
     from os import remove as rmlink
+
     _windows = False
 except Exception:
     _windows = True
@@ -52,10 +54,10 @@ except Exception:
 
     # XXX Implement an atomic thingamajig for win32
     def symlink(value, filename):
-        newlinkname = filename + "." + unique() + '.newlink'
+        newlinkname = filename + "." + unique() + ".newlink"
         newvalname = os.path.join(newlinkname, "symlink")
         os.mkdir(newlinkname)
-        f = _open(newvalname, 'wcb')
+        f = _open(newvalname, "wcb")
         f.write(value)
         f.flush()
         f.close()
@@ -68,7 +70,7 @@ except Exception:
 
     def readlink(filename):
         try:
-            fObj = _open(os.path.join(filename, 'symlink'), 'rb')
+            fObj = _open(os.path.join(filename, "symlink"), "rb")
         except IOError as e:
             if e.errno == errno.ENOENT or e.errno == errno.EIO:
                 raise OSError(e.errno, None)
@@ -79,7 +81,7 @@ except Exception:
             return result
 
     def rmlink(filename):
-        os.remove(os.path.join(filename, 'symlink'))
+        os.remove(os.path.join(filename, "symlink"))
         os.rmdir(filename)
 
 
@@ -207,4 +209,4 @@ def isLocked(name):
     return not result
 
 
-__all__ = ['FilesystemLock', 'isLocked']
+__all__ = ["FilesystemLock", "isLocked"]
