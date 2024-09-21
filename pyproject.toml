@@ -2,9 +2,14 @@
 name = "apc"
 version = "0.1.0"
 description = "APC power switch automation"
-authors = ["Sebastien Celles"]
+authors = ["Sébastien Celles <s.celles@gmail.com>"]
 license = "MIT License"
 readme = "README.md"
+keywords = ["apc", "power", "distribution", "unit", "pdu"]
+classifiers=[
+    'Development Status :: 4 - Beta',
+    'Programming Language :: Python :: 3',
+]
 
 [tool.poetry.dependencies]
 python = "^3.8"
