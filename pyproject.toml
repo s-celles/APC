@@ -1,8 +1,8 @@
 [tool.poetry]
 name = "apc"
-version = "0.1.0"
+version = "0.2.0"
 description = "APC power switch automation"
-authors = ["Sébastien Celles <s.celles@gmail.com>"]
+authors = ["Payton Quackenbush", "Sébastien Celles <s.celles@gmail.com>"]
 license = "MIT License"
 readme = "README.md"
 keywords = ["apc", "power", "distribution", "unit", "pdu"]
