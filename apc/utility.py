@@ -21,6 +21,7 @@ APC_YES = "YES"
 APC_LOGOUT = "4"
 
 APC_VERSION_PATTERN = re.compile(r" v(\d+\.\d+\.\d+)")
+APC_USERTYPE_PATTERN = re.compile(r"User : ([a-zA-Z ]*)")
 
 APC_DEFAULT_HOST = os.environ.get("APC_HOST", "192.168.1.2")
 APC_DEFAULT_USER = os.environ.get("APC_USER", "apc")
@@ -106,6 +107,13 @@ class APCFactory:
         apc.child = child
         apc.version = version
         apc.lock = self.lock
+
+        usertype_match = APC_USERTYPE_PATTERN.search(str(header))
+        if usertype_match:
+            apc.admin = usertype_match.group(1).rstrip() == "Administrator"
+        else:
+            print("Failed to find user type header!")
+            apc.admin = False
 
         return apc
 
@@ -269,7 +277,8 @@ class APC3(AbstractAPC):
         self.sendnl("2")
         self.sendnl("1")
         self.sendnl(str(outlet))
-        self.sendnl("1")
+        if self.admin:
+            self.sendnl("1")
         self.child.before
 
     def configure_outlet(self, outlet):
@@ -277,7 +286,10 @@ class APC3(AbstractAPC):
         self.sendnl("2")
         self.sendnl("1")
         self.sendnl(str(outlet))
-        self.sendnl("2")
+        if not self.admin:
+            raise SystemExit(
+                "Cannot configure an outlet if the user is not an administrator. Please use an Administrator account instead of an Outlet User."
+            )
         self.child.before
 
     def get_command_result(self):
